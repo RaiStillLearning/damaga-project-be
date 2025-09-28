@@ -4,6 +4,7 @@ const cors = require("cors");
 const signupRoutes = require("./routes/signup");
 const loginRoutes = require("./routes/login");
 const forgotRoutes = require("./routes/forgotPassword");
+const verifyRoutes = require("./routes/verify-otp");
 const resetRoutes = require("./routes/resetPassword");
 const usersRoutes = require("./routes/users");
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use("/api/auth/signup", signupRoutes);
 app.use("/api/auth/login", loginRoutes);
 app.use("/api/auth/forgot-password", forgotRoutes);
+app.use("/api/auth/reset-password/verify-otp", verifyRoutes);
 app.use("/api/auth/reset-password", resetRoutes);
 app.use("/api/users", usersRoutes);
 
