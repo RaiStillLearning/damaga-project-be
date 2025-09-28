@@ -1,8 +1,8 @@
-const dotenv = require("dotenv");
+require("dotenv").config();
 const connectDb = require("./config/mongoDb");
+
 const app = require("./index");
 
-dotenv.config();
 connectDb();
 
 app.get("/", (req, res) => {
