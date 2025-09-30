@@ -21,17 +21,18 @@ router.post("/", async (req, res) => {
       expiresIn: "1d",
     });
 
-    res.json({
-      token,
-      user: {
-        _id: user._id,
-        username: user.username,
-        email: user.email,
-        divisi: user.divisi,
-      },
-    });
+    const userData = {
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      divisi: user.divisi || "",
+    };
+
+    console.log("Login success for:", userData);
+
+    return res.status(200).json({ token, user: userData });
   } catch (err) {
-    console.error(err);
+    console.error("Login error:", err);
     res.status(500).json({ error: "Terjadi kesalahan server" });
   }
 });

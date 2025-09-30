@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
+const User = require("../model/Users"); // pastiin path sesuai
 
-function authMiddleware(req, res, next) {
+async function authMiddleware(req, res, next) {
   try {
     const header = req.headers.authorization;
     if (!header) return res.status(401).json({ error: "No token provided" });
@@ -11,7 +12,12 @@ function authMiddleware(req, res, next) {
 
     const token = parts[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; // { id, ... } bisa dipakai di route
+
+    // Ambil user fresh dari DB pake decoded.id
+    const user = await User.findById(decoded.id).select("-password");
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    req.user = user; // sekarang req.user = data fresh dari DB
     next();
   } catch (err) {
     return res.status(401).json({ error: "Invalid or expired token" });

@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema(
     divisi: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
+    avatar: { type: String, default: "/default-avatar.png" },
     otp: String,
     otpExpires: Date,
     otpVerified: { type: Boolean, default: false },
