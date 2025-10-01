@@ -21,12 +21,15 @@ router.post("/", async (req, res) => {
       expiresIn: "1d",
     });
 
-    const userData = {
-      _id: user._id,
-      username: user.username,
-      email: user.email,
-      divisi: user.divisi || "",
-    };
+    res.json({
+      token,
+      user: {
+        username: user.username,
+        email: user.email,
+        avatar: user.avatar,
+        divisi: user.divisi,
+      },
+    });
 
     console.log("Login success for:", userData);
 
