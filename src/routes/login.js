@@ -17,22 +17,21 @@ router.post("/", async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ error: "Password salah" });
 
+    // Sign token dengan user._id
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1d",
     });
 
-    res.json({
-      token,
-      user: {
-        username: user.username,
-        email: user.email,
-        avatar: user.avatar,
-        divisi: user.divisi,
-      },
-    });
+    const userData = {
+      username: user.username,
+      email: user.email,
+      avatar: user.avatar,
+      divisi: user.divisi,
+    };
 
     console.log("Login success for:", userData);
 
+    // Kirim token + userData sekaligus
     return res.status(200).json({ token, user: userData });
   } catch (err) {
     console.error("Login error:", err);
