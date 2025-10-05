@@ -42,4 +42,8 @@ app.use("/api/users", usersRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/profile-update", updateProfileRoute);
 
+//Routes Book A Room
+const bookARoomRoutes = require("./routes/Book-A-Room/controllers");
+app.use("/api/book-a-room", bookARoomRoutes);
+
 module.exports = app;
