@@ -45,11 +45,15 @@ const bookARoomSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    Fax: {
+      type: String,
+      required: false,
+    },
     RoomRate: {
       type: Number,
       required: true,
     },
-    NoOfPerson: {
+    NumberOfPerson: {
       type: Number,
       required: true,
     },
@@ -69,6 +73,10 @@ const bookARoomSchema = new mongoose.Schema(
       type: String,
       enum: ["Phone", "Direct", "Letter", "Fax"],
       default: "Direct",
+    },
+    Request: {
+      type: String,
+      required: true,
     },
     Clerk: {
       type: String,
