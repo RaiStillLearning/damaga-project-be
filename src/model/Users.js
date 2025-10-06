@@ -1,3 +1,4 @@
+// models/User.js
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema(
@@ -10,6 +11,20 @@ const userSchema = new mongoose.Schema(
     otp: String,
     otpExpires: Date,
     otpVerified: { type: Boolean, default: false },
+    // TAMBAHKAN INI
+    dashboardTiles: {
+      type: [
+        {
+          id: String,
+          title: String,
+          url: String,
+          iconName: String,
+          description: String,
+          color: String,
+        },
+      ],
+      default: [],
+    },
   },
   { timestamps: true }
 );

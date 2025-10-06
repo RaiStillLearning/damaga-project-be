@@ -38,6 +38,10 @@ app.use("/api/auth/reset-password/verify-otp", verifyRoutes);
 app.use("/api/auth/reset-password", resetRoutes);
 app.use("/api/users", usersRoutes);
 
+// tiles routes
+const tilesRoutes = require("./routes/tiles");
+app.use(tilesRoutes);
+
 // routes profile
 app.use("/api/profile", profileRoutes);
 app.use("/api/profile-update", updateProfileRoute);
