@@ -26,6 +26,10 @@ const bookARoomSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    NoOfRoom: {
+      type: Number,
+      required: true,
+    },
     ArrDate: {
       type: Date,
       default: Date.now,
