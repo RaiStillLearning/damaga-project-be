@@ -53,9 +53,10 @@ const bookARoomSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    NumberOfPerson: {
+    NoOfPerson: {
       type: Number,
       required: true,
+      alias: "NumberOfPerson", // Tambahkan alias jika perlu backward compatibility
     },
     ArrTime: {
       type: String,

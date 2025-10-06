@@ -15,7 +15,11 @@ exports.createBooking = async (req, res) => {
 exports.getAllBookings = async (req, res) => {
   try {
     const bookings = await BookARoom.find();
-    res.json(bookings);
+    res.json({
+      success: true,
+      count: bookings.length,
+      bookings: bookings,
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
