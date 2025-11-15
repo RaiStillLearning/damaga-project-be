@@ -30,6 +30,31 @@ const bookARoomSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    // ✅ Field baru yang ditambahkan
+    RoomNumber: {
+      type: String,
+      required: false,
+    },
+    IDNumber: {
+      type: String,
+      required: false,
+    },
+    DateOfIssue: {
+      type: Date,
+      required: false,
+    },
+    DateOfBirth: {
+      type: Date,
+      required: false,
+    },
+    Source: {
+      type: String,
+      required: false,
+    },
+    Note: {
+      type: String,
+      required: false,
+    },
     ArrDate: {
       type: Date,
       default: Date.now,
@@ -37,17 +62,21 @@ const bookARoomSchema = new mongoose.Schema(
     DeptDate: {
       type: Date,
     },
+    // ✅ Ubah jadi optional dengan default value
     TypeOfGuest: {
       type: String,
-      required: true,
+      required: false,
+      default: "Walk-in",
     },
     City: {
       type: String,
-      required: true,
+      required: false,
+      default: "-",
     },
     ZipCode: {
       type: Number,
-      required: true,
+      required: false,
+      default: 0,
     },
     Fax: {
       type: String,
@@ -60,7 +89,7 @@ const bookARoomSchema = new mongoose.Schema(
     NoOfPerson: {
       type: Number,
       required: true,
-      alias: "NumberOfPerson", // Tambahkan alias jika perlu backward compatibility
+      alias: "NumberOfPerson",
     },
     ArrTime: {
       type: String,
@@ -81,11 +110,31 @@ const bookARoomSchema = new mongoose.Schema(
     },
     Request: {
       type: String,
-      required: true,
+      required: false,
+      default: "None",
     },
     Clerk: {
       type: String,
       required: true,
+    },
+    Discount: {
+      type: Number,
+      required: false,
+      default: 0,
+    },
+    // ✅ Status check-in
+    status: {
+      type: String,
+      enum: ["pending", "confirmed", "checked-in", "checked-out", "cancelled"],
+      default: "pending",
+    },
+    checkInDate: {
+      type: Date,
+      required: false,
+    },
+    checkOutDate: {
+      type: Date,
+      required: false,
     },
   },
   {
