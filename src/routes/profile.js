@@ -13,7 +13,7 @@ router.get("/", auth, async (req, res) => {
         username: u.username,
         email: u.email,
         avatar: u.avatar,
-        divisi: u.divisi,
+        // divisi: u.divisi,
         role: u.role, // ⬅️ penting
       },
     });

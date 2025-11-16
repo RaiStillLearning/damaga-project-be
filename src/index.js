@@ -11,6 +11,9 @@ const usersRoutes = require("./routes/users");
 const profileRoutes = require("./routes/profile");
 const updateProfileRoute = require("./routes/updateProfile");
 
+//updated role
+const updateRoleRoute = require("./routes/updateRole");
+
 // hanya 1 middleware CORS
 app.use(
   cors({
@@ -49,5 +52,8 @@ app.use("/api/profile-update", updateProfileRoute);
 //Routes Book A Room
 const bookARoomRoutes = require("./routes/Book-A-Room/controllers");
 app.use("/api/book-a-room", bookARoomRoutes);
+
+//update role
+app.use("/api/admin", updateRoleRoute);
 
 module.exports = app;

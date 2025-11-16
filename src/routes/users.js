@@ -19,7 +19,7 @@ router.get("/", auth, requireRole("admin"), async (req, res) => {
     if (search) {
       // cari by username, email, atau divisi (case-insensitive)
       const regex = new RegExp(search, "i");
-      filter.$or = [{ username: regex }, { email: regex }, { divisi: regex }];
+      filter.$or = [{ username: regex }, { email: regex }];
     }
 
     const [users, total] = await Promise.all([

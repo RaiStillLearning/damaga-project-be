@@ -34,7 +34,7 @@ router.post("/", async (req, res) => {
       username: user.username,
       email: user.email,
       avatar: user.avatar,
-      divisi: user.divisi,
+      // divisi: user.divisi,
       role: user.role || "front-office", // fallback kalau user lama belum punya role
     };
 

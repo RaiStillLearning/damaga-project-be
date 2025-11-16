@@ -5,9 +5,9 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
   try {
-    const { username, divisi, email, password, role, adminCode } = req.body;
+    const { username, email, password, role, adminCode } = req.body;
 
-    if (!username || !divisi || !email || !password)
+    if (!username || !email || !password)
       return res.status(400).json({ error: "All fields are required" });
 
     const existingUser = await User.findOne({ email });
@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
 
     const user = await User.create({
       username,
-      divisi,
+      // divisi,
       email,
       password: hashed,
       role: finalRole,
@@ -39,7 +39,7 @@ router.post("/", async (req, res) => {
       message: "User registered successfully",
       user: {
         username: user.username,
-        divisi: user.divisi,
+        // divisi: user.divisi,
         email: user.email,
         role: user.role,
       },
