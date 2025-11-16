@@ -30,7 +30,6 @@ const bookARoomSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    // ✅ Field baru yang ditambahkan
     RoomNumber: {
       type: String,
       required: false,
@@ -62,7 +61,6 @@ const bookARoomSchema = new mongoose.Schema(
     DeptDate: {
       type: Date,
     },
-    // ✅ Ubah jadi optional dengan default value
     TypeOfGuest: {
       type: String,
       required: false,
@@ -85,6 +83,13 @@ const bookARoomSchema = new mongoose.Schema(
     RoomRate: {
       type: Number,
       required: true,
+    },
+    // ✅ TAMBAHKAN INI - Currency untuk room rate
+    RoomRateCurrency: {
+      type: String,
+      enum: ["USD", "IDR"],
+      default: "USD",
+      required: false,
     },
     NoOfPerson: {
       type: Number,
@@ -122,10 +127,50 @@ const bookARoomSchema = new mongoose.Schema(
       required: false,
       default: 0,
     },
-    // ✅ Status check-in
+    // ✅ TAMBAHKAN INI - Advance Deposit
+    AdvanceDeposit: {
+      type: Number,
+      required: false,
+      default: 0,
+    },
+    // ✅ TAMBAHKAN INI - Company Information
+    CompanyName: {
+      type: String,
+      required: false,
+    },
+    CompanyPhone: {
+      type: String,
+      required: false,
+    },
+    CompanyAddress: {
+      type: String,
+      required: false,
+    },
+    // ✅ TAMBAHKAN INI - Payment Details
+    VoucherNumber: {
+      type: String,
+      required: false,
+    },
+    CreditCardNumber: {
+      type: String,
+      required: false,
+    },
+    ApprovalCode: {
+      type: String,
+      required: false,
+    },
+    // Status check-in
     status: {
       type: String,
-      enum: ["pending", "confirmed", "checked-in", "checked-out", "cancelled"],
+      enum: [
+        "pending",
+        "confirmed",
+        "checked-in",
+        "checked-out",
+        "cancelled",
+        "In-house",
+        "stay-over",
+      ],
       default: "pending",
     },
     checkInDate: {

@@ -11,7 +11,13 @@ const userSchema = new mongoose.Schema(
     otp: String,
     otpExpires: Date,
     otpVerified: { type: Boolean, default: false },
-    // TAMBAHKAN INI
+    //new role field
+    role: {
+      type: String,
+      enum: ["admin", "front-office"],
+      default: "front-office",
+    },
+    //Tiles for dashboard customization
     dashboardTiles: {
       type: [
         {

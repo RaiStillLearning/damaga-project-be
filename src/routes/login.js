@@ -1,3 +1,4 @@
+// routes/authLogin.js (nama asumsi, pakai punya kamu saja)
 const express = require("express");
 const bcrypt = require("bcrypt");
 const User = require("../model/Users");
@@ -17,16 +18,24 @@ router.post("/", async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ error: "Password salah" });
 
-    // Sign token dengan user._id
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    // ✅ Sign token (boleh tetap cuma id, karena di middleware kita ambil user fresh)
+    const payload = {
+      id: user._id,
+      role: user.role, // opsional, tapi nice to have
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: "1d",
     });
 
+    // ✅ Pastikan role ikut dikirim ke frontend
     const userData = {
+      id: user._id,
       username: user.username,
       email: user.email,
       avatar: user.avatar,
       divisi: user.divisi,
+      role: user.role || "front-office", // fallback kalau user lama belum punya role
     };
 
     console.log("Login success for:", userData);

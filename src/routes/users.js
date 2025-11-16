@@ -2,12 +2,13 @@
 const express = require("express");
 const User = require("../model/Users"); // path sesuaikan
 const auth = require("../middleware/auth");
+const { requireRole } = require("../middleware/role");
 
 const router = express.Router();
 
 // GET /api/users
 // optional query: ?page=1&limit=20&search=rakha
-router.get("/", auth, async (req, res) => {
+router.get("/", auth, requireRole("admin"), async (req, res) => {
   try {
     const page = Math.max(1, parseInt(req.query.page) || 1);
     const limit = Math.max(1, parseInt(req.query.limit) || 20);
@@ -47,7 +48,7 @@ router.get("/", auth, async (req, res) => {
 });
 
 // GET /api/users/:id
-router.get("/:id", auth, async (req, res) => {
+router.get("/:id", auth, requireRole("admin"), async (req, res) => {
   try {
     const user = await User.findById(req.params.id)
       .select("-password -otp -otpExpires -__v")

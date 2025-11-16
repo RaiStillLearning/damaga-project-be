@@ -3,13 +3,9 @@ const bcrypt = require("bcrypt");
 const User = require("../model/Users");
 const router = express.Router();
 
-// POST /api/register
 router.post("/", async (req, res) => {
-  console.log("REQ BODY:", req.body);
-  res.json({ body: req.body });
-
   try {
-    const { username, divisi, email, password } = req.body;
+    const { username, divisi, email, password, role, adminCode } = req.body;
 
     if (!username || !divisi || !email || !password)
       return res.status(400).json({ error: "All fields are required" });
@@ -18,6 +14,17 @@ router.post("/", async (req, res) => {
     if (existingUser)
       return res.status(400).json({ error: "Email already registered" });
 
+    // Default role user biasa
+    let finalRole = "front-office";
+
+    // Jika user ingin menjadi admin
+    if (role === "admin") {
+      if (adminCode !== process.env.ADMIN_SECRET) {
+        return res.status(403).json({ error: "Invalid admin code" });
+      }
+      finalRole = "admin";
+    }
+
     const hashed = await bcrypt.hash(password, 10);
 
     const user = await User.create({
@@ -25,10 +32,20 @@ router.post("/", async (req, res) => {
       divisi,
       email,
       password: hashed,
+      role: finalRole,
     });
 
-    res.status(201).json({ message: "User registered successfully", user });
+    res.status(201).json({
+      message: "User registered successfully",
+      user: {
+        username: user.username,
+        divisi: user.divisi,
+        email: user.email,
+        role: user.role,
+      },
+    });
   } catch (err) {
+    console.error("REGISTER ERROR:", err);
     res.status(500).json({ error: err.message });
   }
 });

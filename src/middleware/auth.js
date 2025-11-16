@@ -1,3 +1,4 @@
+// middleware/auth.js
 const jwt = require("jsonwebtoken");
 const User = require("../model/Users"); // pastikan path sesuai
 
@@ -32,7 +33,7 @@ async function authMiddleware(req, res, next) {
       return res.status(404).json({ error: "User not found" });
     }
 
-    req.user = user; // req.user = data fresh dari DB
+    req.user = user; // req.user = data fresh dari DB (include role, divisi, dll)
     next();
   } catch (err) {
     console.error("❌ Middleware server error:", err);
