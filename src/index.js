@@ -56,8 +56,14 @@ app.use("/api/book-a-room", bookARoomRoutes);
 //update role
 app.use("/api/admin", updateRoleRoute);
 
-//Room Rate 
+//Room Rate
 const roomRateRoutes = require("./routes/roomRateRutes");
 app.use("/api/room-rates", roomRateRoutes);
+
+//room status
+const roomsRouter = require("./routes/rooms");
+
+// ...
+app.use("/api/rooms", roomsRouter);
 
 module.exports = app;

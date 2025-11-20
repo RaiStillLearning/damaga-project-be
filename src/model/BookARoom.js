@@ -168,11 +168,13 @@ const bookARoomSchema = new mongoose.Schema(
         "checked-in",
         "checked-out",
         "cancelled",
-        "In-house",
+        "in-house",
         "stay-over",
       ],
       default: "pending",
+      lowercase: true,
     },
+
     checkInDate: {
       type: Date,
       required: false,
