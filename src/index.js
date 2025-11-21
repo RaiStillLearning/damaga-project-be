@@ -62,8 +62,6 @@ app.use("/api/room-rates", roomRateRoutes);
 
 //room status
 const roomsRouter = require("./routes/rooms");
-
-// ...
 app.use("/api/rooms", roomsRouter);
 
 module.exports = app;
