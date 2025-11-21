@@ -29,7 +29,10 @@ app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
 // log request
 app.use((req, res, next) => {
-  console.log("🔥 Incoming Request:", req.method, req.url);
+  console.log("🔥 Incoming Request:", req.method, req.url, {
+    ip: req.headers["x-forwarded-for"] || req.socket.remoteAddress,
+    userAgent: req.headers["user-agent"],
+  });
   next();
 });
 
