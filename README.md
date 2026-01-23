@@ -31,8 +31,8 @@ School Project
 ## Installation & Setup
 1. Clone repository
    ```bash
-   git clone https://github.com/username/damaga-suite-backend.git
-   cd damaga-suite-frontend
+   https://github.com/RaiStillLearning/damaga-project-be
+   cd damaga-project-be
    npm install
-   npm run dev
+   npm start
    
