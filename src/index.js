@@ -17,11 +17,11 @@ const updateRoleRoute = require("./routes/updateRole");
 // hanya 1 middleware CORS
 app.use(
   cors({
-    origin: "https://damaga-project-fe.vercel.app",
+    origin: "http://localhost:3000",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true, // kalau pake cookie
-  })
+  }),
 );
 
 app.use(express.json({ limit: "10mb" }));
