@@ -15,14 +15,18 @@ const updateProfileRoute = require("./routes/updateProfile");
 const updateRoleRoute = require("./routes/updateRole");
 
 // hanya 1 middleware CORS
+const cors = require("cors");
+
 app.use(
   cors({
-    origin: "https://www.damaga.my.id",
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: ["https://www.damaga.my.id"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true, // kalau pake cookie
+    credentials: true,
   }),
 );
+
+app.options("*", cors());
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
