@@ -54,7 +54,9 @@ router.put("/", auth, upload.single("avatar"), async (req, res) => {
       // OPTIONAL: Delete old avatar if it exists and is not the default
       const oldUser = await User.findById(userId);
       if (oldUser.avatar && oldUser.avatar.startsWith("/uploads/avatars/")) {
-        const oldFilePath = path.join(__dirname, "..", oldUser.avatar);
+        // Path joining fix: strip leading slash or join more robustly
+        const fileName = path.basename(oldUser.avatar);
+        const oldFilePath = path.join(__dirname, "..", "uploads", "avatars", fileName);
         if (fs.existsSync(oldFilePath)) {
           fs.unlinkSync(oldFilePath);
         }
