@@ -9,17 +9,13 @@ const verifyRoutes = require("./routes/verify-otp");
 const resetRoutes = require("./routes/resetPassword");
 const usersRoutes = require("./routes/users");
 const profileRoutes = require("./routes/profile");
-const updateProfileRoute = require("./routes/updateProfile");
-
-//updated role
 const updateRoleRoute = require("./routes/updateRole");
 
-// hanya 1 middleware CORS
-const cors = require("cors");
+const path = require("path");
 
 app.use(
   cors({
-    origin: ["https://www.damaga.my.id"],
+    origin: ["https://www.damaga.my.id", "http://localhost:3000"],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
@@ -30,6 +26,9 @@ app.options("*", cors());
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
+
+// static files for uploads
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // log request
 app.use((req, res, next) => {
@@ -54,7 +53,6 @@ app.use(tilesRoutes);
 
 // routes profile
 app.use("/api/profile", profileRoutes);
-app.use("/api/profile-update", updateProfileRoute);
 
 //Routes Book A Room
 const bookARoomRoutes = require("./routes/Book-A-Room/controllers");
