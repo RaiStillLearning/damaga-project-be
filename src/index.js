@@ -15,12 +15,18 @@ const path = require("path");
 
 app.use(
   cors({
-    origin: ["https://www.damaga.my.id"],
+    origin: [
+      "https://www.damaga.my.id",
+      "https://damaga.my.id",
+      "http://localhost:3000",
+      "http://localhost:3001"
+    ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   }),
 );
+
 
 app.options("*", cors());
 
