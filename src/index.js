@@ -15,7 +15,7 @@ const path = require("path");
 
 app.use(
   cors({
-    origin: ["https://www.damaga.my.id", "http://localhost:3000"],
+    origin: ["https://www.damaga.my.id"],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
