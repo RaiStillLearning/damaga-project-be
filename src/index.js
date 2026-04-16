@@ -16,8 +16,7 @@ app.use(
   })
 );
 
-// Handle Preflight OPTIONS request untuk semua rute
-app.options("*", cors());
+// Handle Preflight OPTIONS request untuk semua rute dihapus karena cukup app.use(cors)
 
 /**
  * 2. Middleware Dasar
